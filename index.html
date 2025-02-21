@@ -38,8 +38,8 @@
             left: 10px;
         }
 
-        header img {
-            max-width: 200px;
+        .logo {
+            width: 200px;
             height: auto;
         }
 
@@ -63,15 +63,24 @@
             font-size: 1.2em;
         }
 
-        img {
+        .carousel {
+            position: relative;
             max-width: 100%;
-            height: auto;
-            border-radius: 0px;
+            overflow: hidden;
+        }
+
+        .carousel img {
+            width: 100%;
+            display: none;
+        }
+
+        .carousel img.active {
+            display: block;
         }
 
         @media (max-width: 768px) {
-            header img {
-                max-width: 150px;
+            .logo {
+                width: 150px;
             }
 
             .container {
@@ -87,15 +96,35 @@
             }
         }
     </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let images = document.querySelectorAll(".carousel img");
+            let index = 0;
+            function changeImage() {
+                images[index].classList.remove("active");
+                index = (index + 1) % images.length;
+                images[index].classList.add("active");
+            }
+            images[index].classList.add("active");
+            setInterval(changeImage, 3000);
+        });
+    </script>
 </head>
 <body>
     <header>
-        <img src="logo.png" alt="Bete Esteves Logo">
+        <img src="logo.svg" alt="Bete Esteves Logo" class="logo">
     </header>
     <main>
         <div class="container">
             <p class="development-text">CURRENTLY<br>IN DEVELOPMENT</p>
-            <img src="image.png" alt="House Image">
+            <div class="carousel">
+                <img src="image1.jpg" alt="House Image 1">
+                <img src="image2.jpg" alt="House Image 2">
+                <img src="image3.jpg" alt="House Image 3">
+                <img src="image4.jpg" alt="House Image 4">
+                <img src="image5.jpg" alt="House Image 5">
+                <img src="image6.jpg" alt="House Image 6">
+            </div>
             <p class="contact-text">inquiries at:<br>beteaesteves@gmail.com</p>
         </div>
     </main>
